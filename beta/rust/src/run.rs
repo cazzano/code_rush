@@ -5,11 +5,15 @@ use std::process::Command;
 pub fn run_c_program(file_name: &str) {
     println!("Attempting to compile and run: {}", file_name);
 
+    // Check if the C file includes math.h
+    let mut compile_args = vec![file_name, "-o", "output"];
+    if includes_math_h(file_name) {
+        compile_args.push("-lm"); // Add the -lm flag if math.h is included
+    }
+
     // Compile the C program
     let compile_status = Command::new("gcc")
-        .arg(file_name)
-        .arg("-o")
-        .arg("output")
+        .args(&compile_args)
         .status()
         .expect("Failed to execute compile command");
 
@@ -41,10 +45,14 @@ pub fn run_c_program(file_name: &str) {
 pub fn compile_only(file_name: &str) {
     println!("Attempting to compile only: {}", file_name);
 
+    // Check if the C file includes math.h
+    let mut compile_args = vec![file_name, "-o", "output"];
+    if includes_math_h(file_name) {
+        compile_args.push("-lm"); // Add the -lm flag if math.h is included
+    }
+
     let compile_status = Command::new("gcc")
-        .arg(file_name)
-        .arg("-o")
-        .arg("output")
+        .args(&compile_args)
         .status()
         .expect("Failed to execute compile command");
 
@@ -56,4 +64,10 @@ pub fn compile_only(file_name: &str) {
         "Compiled {} successfully. Output binary is 'output'.",
         file_name
     );
+}
+
+// Function to check if the C file includes math.h
+fn includes_math_h(file_name: &str) -> bool {
+    let content = fs::read_to_string(file_name).unwrap_or_default();
+    content.contains("#include <math.h>")
 }
