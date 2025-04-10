@@ -7,8 +7,8 @@ import "fmt"
 func DisplayHelp() {
 	fmt.Println("Usage: codersh <command>")
 	fmt.Println("Commands:")
-	fmt.Println("  run         - Runs a c program and removes output binary")
-	fmt.Println("  run -r      - Compiles an c program into binary only.")
-	fmt.Println("  --v         - Gives version")
-	fmt.Println("  --h         - Gives some help")
+	fmt.Println("  run          - Runs a c program and removes output binary")
+	fmt.Println("  run --r      - Compiles an c program into binary only.")
+	fmt.Println("  --v          - Gives version")
+	fmt.Println("  --h          - Gives some help")
 }
