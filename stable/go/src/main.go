@@ -17,7 +17,7 @@ func main() {
             fmt.Println("Please provide the C file name to run.")
             return
         }
-        if len(os.Args) == 4 && os.Args[2] == "-r" {
+        if len(os.Args) == 4 && os.Args[2] == "--r" {
             compileOnly(os.Args[3]) // Call the function to compile only
         } else {
             runCProgram(os.Args[2]) // Call the function to compile, link, and run
